@@ -78,10 +78,20 @@ class CollaboratorRequestController extends Controller
      */
     public function confirm(Request $request)
     {
+        // the key is stored in the $category.
+        $category = $request->category;
         $inputs = $request->all();
-        return view('requests.confirm', ['inputs' => $inputs,]);
+        return view('requests.confirm', ['inputs' => $inputs]);
     }
+    /**
+     * Send the confirmed form for storing a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function send(Request $request)
+    {
 
+    }
 
     /**
      * Store a newly created resource in storage.

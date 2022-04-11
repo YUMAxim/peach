@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CollaboratorRequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CollaboratorRequestController::class, 'index'])->name('requests.index');
+Route::post('comfirm', [CollaboratorRequestController::class, 'confirm'])->name('requests.confirm');
+Route::post('send', [CollaboratorRequestController::class, 'send'])->name('requests.send');
+Route::resource('requests', CollaboratorRequestController::class)->except(['index']);
 
-Route::get('/dashboard', function () {
+Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
