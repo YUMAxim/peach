@@ -1,4 +1,11 @@
-#edit phpmyadmin/config.inc.php
-docker container cp peach-phpmyadmin-1:/etc/phpmyadmin/config.inc.p
-hp /home/yuma/pma-config-edit
+#convert the label tags in views to the LaravelCollective formats. label, button, form, csrf
 
+#install tableplus docker
+
+#install tailwind css
+
+#migrate /mnt/c... to /home/...
+
+#route setting confirm, send
+
+#manage tasks with the github
