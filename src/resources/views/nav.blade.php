@@ -1,6 +1,6 @@
 <nav>
     <a href="/">Peach</a>
-    <ul class="">gin/develop
+    <ul class="">
 
         @guest
         <li class="nav-item">
