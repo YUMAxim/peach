@@ -1,6 +1,6 @@
 #convert the label tags in views to the LaravelCollective formats. label, button, form, csrf
 
-#install tableplus docker
+#install tableplus
 
 #install tailwind css
 
