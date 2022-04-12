@@ -78,8 +78,6 @@ class CollaboratorRequestController extends Controller
      */
     public function confirm(Request $request)
     {
-        // the key is stored in the $category.
-        $category = $request->category;
         $inputs = $request->all();
         return view('requests.confirm', ['inputs' => $inputs]);
     }
