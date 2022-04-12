@@ -1,6 +1,5 @@
 @csrf
 <label>募集タイトル</label>
-
 <input type="text" name="title" required value="{{ $request->title ?? old('title') }}">
 
 <label>募集内容の詳細</label>
@@ -53,10 +52,10 @@
 </div>
 
 
-{{-- <label>募集締切</label>
+<label>募集締切</label>
 {{Form::select('application-deadline', ['' => '', '' => '', '' => ''])}}
 
 <label>納品希望日</label>
-{{Form::select('deadline', ['' => '', '' => '', '' => ''])}} --}}
+{{Form::select('deadline', ['' => '', '' => '', '' => ''])}}
 
 {{ Form::submit('確認画面へ') }}
