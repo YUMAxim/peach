@@ -1,6 +1,10 @@
 <nav>
     <a href="/">Peach</a>
+<<<<<<< HEAD
     <ul>
+=======
+    <ul class="">gin/develop
+>>>>>>> b8cb8ad... make: navi
 
         @guest
         <li class="nav-item">
