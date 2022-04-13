@@ -21,7 +21,7 @@
         {{ Form::label('budget', '予算') }}
         {{ Form::label('page', 'ページ数') }}
         {{ Form::label('booksize', 'サイズ') }}
-        {{Form::label('fileFormat','ファイル形式')}}
+        {{ Form::label('fileFormat','ファイル形式')}}
         {{ Form::label('my_role', 'あなたの担当') }}
         {{ Form::label('collaborator_role', '募集する担当') }}
         {{ Form::label('desiredColorImpression', '希望の色のイメージ') }}
