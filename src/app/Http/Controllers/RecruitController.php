@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Recruit;
 use App\Http\Requests\RecruitRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\RecruitSelectController;
 
 class RecruitController extends Controller
 {
@@ -67,9 +67,12 @@ class RecruitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(RecruitSelectController $categories_name)
+    public function create()
     {
-        $categories_name->categories();
+        $categories = Category::select('name')->get();
+        $categories_name = $categories->pluck('name');
+        $categories_name->prepend('カテゴリーを選択してください');
+        // $categories = ['animal', 'science'];
         return view('recruits.create', ['categories_name' => $categories_name]);
     }
 
