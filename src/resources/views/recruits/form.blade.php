@@ -6,10 +6,8 @@
 <textarea name="body" required rows="16" placeholder="募集内容の詳細を入力してください">{{ $recruit->body ?? old('body') }}</textarea>
 
 <label>カテゴリー</label>
-{{ Form::select('category', $categories_name, null) }}
-{{--     @foreach ($categories_name as $category)
-        {{ $category }}<br>
-    @endforeach --}}
+{{ Form::select('category', $categories_name) }}
+
 <label>予算</label>
 {{Form::select('budget', ['予算を選択してください', '10' => '10,000円', '20' => '20,000円', '30' => '30,000円']), 0}}
 
@@ -61,3 +59,7 @@
 {{Form::select('deadline', ['' => '', '' => '', '' => ''])}}
 
 {{ Form::submit('確認画面へ') }}
+
+@php
+    var_dump($categories_name);
+@endphp

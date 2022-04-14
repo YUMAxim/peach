@@ -71,6 +71,7 @@ class RecruitController extends Controller
     {
         $categories = Category::select('name')->get();
         $categories_name = $categories->pluck('name');
+        $categories_name->prepend('カテゴリーを選択してください');
         // $categories = ['animal', 'science'];
         return view('recruits.create', ['categories_name' => $categories_name]);
     }
