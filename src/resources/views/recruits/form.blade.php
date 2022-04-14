@@ -1,9 +1,9 @@
 @csrf
 <label>募集タイトル</label>
-<input type="text" name="title" required value="{{ $request->title ?? old('title') }}">
+<input type="text" name="title" required value="{{ $recruit->title ?? old('title') }}">
 
 <label>募集内容の詳細</label>
-<textarea name="body" required rows="16" placeholder="募集内容の詳細を入力してください">{{ $request->body ?? old('body') }}</textarea>
+<textarea name="body" required rows="16" placeholder="募集内容の詳細を入力してください">{{ $recruit->body ?? old('body') }}</textarea>
 
 <label>カテゴリー</label>
 {{Form::select('category', ['category_A' => 'A', 'category_B' => 'B', 'category_C' => 'C'])}}
@@ -38,7 +38,7 @@
 
 <div>
     <label>募集する担当</label>
-{{Form::select('collaborator_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C'])}}
+{{Form::select('recruits_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C'])}}
 </div>
 
 </div>

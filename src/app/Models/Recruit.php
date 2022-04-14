@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CollaboratorRequest extends Model
+class Recruit extends Model
 {
     protected $fillable = [
         'title',
@@ -19,7 +19,7 @@ class CollaboratorRequest extends Model
         'deadline',
     ];
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo('App\User');
     }

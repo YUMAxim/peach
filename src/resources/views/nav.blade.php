@@ -24,7 +24,7 @@
 
         @auth
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('requests.create') }}">募集する</a>
+            <a class="nav-link" href="{{ route('recruits.create') }}">募集する</a>
         </li>
         @endauth
 

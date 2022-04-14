@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CollaboratorRequestController;
+use App\Http\Controllers\RecruitController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +13,13 @@ use App\Http\Controllers\CollaboratorRequestController;
 |
 */
 
-Route::get('/', [CollaboratorRequestController::class, 'index'])->name('requests.index');
-Route::post('comfirm', [CollaboratorRequestController::class, 'confirm'])->name('requests.confirm');
-Route::post('send', [CollaboratorRequestController::class, 'send'])->name('requests.send');
-Route::resource('requests', CollaboratorRequestController::class)->except(['index']);
+Route::get('/', [RecruitController::class, 'index'])->name('recruits.index');
+Route::post('comfirm', [RecruitController::class, 'confirm'])->name('recruits.confirm');
+Route::post('send', [RecruitController::class, 'send'])->name('recruits.send');
+Route::resource('recruits', RecruitController::class)->except(['index']);
 
 Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

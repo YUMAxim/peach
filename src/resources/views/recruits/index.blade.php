@@ -4,28 +4,28 @@
 
 @section('content')
     @include('nav')
-    @foreach ($requests as $request)
+    @foreach ($recruits as $recruit)
     <div class="container">
         <div class="">
-            {{ $request->user->name }}
+            {{ $recruit->user->name }}
         </div>
         <div class="">
-            {{ $request->created_at->format('Y/m/d H:i') }}
+            {{ $recruit->created_at->format('Y/m/d H:i') }}
         </div>
         <h3 class="">
-            {{ $request->title }}
+            {{ $recruit->title }}
         </h3>
         <div class="">
-            {!! nl2br(e( $request->body )) !!}
+            {!! nl2br(e( $recruit->body )) !!}
         </div>
         <div class="">
-            {{ $request->category }}
+            {{ $recruit->category }}
         </div>
         <div class="">
-            {{ $request->budget }}
+            {{ $recruit->budget }}
         </div>
         <div class="">
-            {{ $request->collaborator_role }}
+            {{ $recruit->recruits_role }}
         </div>
     </div>
     @endforeach

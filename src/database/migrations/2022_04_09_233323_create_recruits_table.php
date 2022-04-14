@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('collaborator_requests', function (Blueprint $table) {
+        Schema::create('recruits', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('body');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->integer('budget');
             $table->integer('my_role');
-            $table->integer('collaborator_role');
+            $table->integer('recruits_role');
             $table->integer('page');
             $table->integer('book_size');
             $table->integer('file_format');
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collaborator_requests');
+        Schema::dropIfExists('recruits_requests');
     }
 };

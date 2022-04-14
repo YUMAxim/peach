@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CollaboratorRequest;
-use App\Http\Requests\RequestRequest;
+use App\Models\Recruit;
+use App\Http\recruits\RequestRequest;
 use Illuminate\Http\Request;
 
-class CollaboratorRequestController extends Controller
+class RecruitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +15,14 @@ class CollaboratorRequestController extends Controller
      */
     public function index()
     {
-/*         $requests = [
+        /*         $recruits = [
             (object) [
                 'id' => 1,
                 'title' => '募集タイトル1',
                 'body' => '募集内容の詳細1',
                 'budget' => '10万円',
                 'category' => 'A',
-                'collaborator_role' => 'A',
+                'recruits_role' => 'A',
                 'created_at' => now(),
                 'user' => (object) [
                     'id' => 1,
@@ -35,7 +35,7 @@ class CollaboratorRequestController extends Controller
                 'body' => '募集内容の詳細1',
                 'budget' => '10万円',
                 'category' => 'A',
-                'collaborator_role' => 'A',
+                'recruits_role' => 'A',
                 'created_at' => now(),
                 'user' => (object) [
                     'id' => 1,
@@ -48,7 +48,7 @@ class CollaboratorRequestController extends Controller
                 'body' => '募集内容の詳細1',
                 'budget' => '10万円',
                 'category' => 'A',
-                'collaborator_role' => 'A',
+                'recruits_role' => 'A',
                 'created_at' => now(),
                 'user' => (object) [
                     'id' => 1,
@@ -57,8 +57,8 @@ class CollaboratorRequestController extends Controller
             ],
         ];
  */
-        $requests = CollaboratorRequest::with('user')->get();
-        return view('requests.index', ['requests' => $requests]);
+        $recruits = Recruit::with('user')->get();
+        return view('recruits.index', ['recruits' => $recruits]);
     }
 
     /**
@@ -68,7 +68,7 @@ class CollaboratorRequestController extends Controller
      */
     public function create()
     {
-        return view('requests.create');
+        return view('recruits.create');
     }
 
     /**
@@ -79,7 +79,7 @@ class CollaboratorRequestController extends Controller
     public function confirm(Request $request)
     {
         $inputs = $request->all();
-        return view('requests.confirm', ['inputs' => $inputs]);
+        return view('recruits.confirm', ['inputs' => $inputs]);
     }
     /**
      * Send the confirmed form for storing a new resource.
@@ -88,7 +88,6 @@ class CollaboratorRequestController extends Controller
      */
     public function send(Request $request)
     {
-
     }
 
     /**
@@ -100,7 +99,7 @@ class CollaboratorRequestController extends Controller
     public function store(Request $request)
     {
 
-        return redirect('requests.index');
+        return redirect('recruits.index');
     }
 
     /**
