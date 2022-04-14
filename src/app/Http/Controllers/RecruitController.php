@@ -88,14 +88,6 @@ class RecruitController extends Controller
         $inputs = $request->all();
         return view('recruits.confirm', ['inputs' => $inputs]);
     }
-    /**
-     * Send the confirmed form for storing a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function send(Request $request)
-    {
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -105,7 +97,6 @@ class RecruitController extends Controller
      */
     public function store(Request $request)
     {
-
         return redirect('recruits.index');
     }
 

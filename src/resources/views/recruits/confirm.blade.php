@@ -2,8 +2,8 @@
 
 @section('content')
 <div>
-    <form method="POST" action="{{ route('requests.send') }}">
-        @csrf
+    <form method="POST" action="{{ route('requests.store') }}" enctype="multipart/form-data">
+    @csrf
         <label>募集タイトル</label>
         {{ $inputs['title'] }}
         {{-- {{ Form::hidden('title', {{ $inputs['title'] }}) }} --}}
@@ -36,8 +36,7 @@
             送信する
         </button>
     </form>
+
 </div>
-<?php
-var_dump($inputs);
-?>
+dd($inputs);
 @endsection
