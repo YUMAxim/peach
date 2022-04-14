@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recruit;
 use App\Http\Requests\RecruitRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class RecruitController extends Controller
@@ -68,7 +69,10 @@ class RecruitController extends Controller
      */
     public function create()
     {
-        return view('recruits.create');
+        $categories = Category::select('name')->get();
+        $categories_name = $categories->pluck('name');
+        // $categories = ['animal', 'science'];
+        return view('recruits.create', ['categories_name' => $categories_name]);
     }
 
     /**
