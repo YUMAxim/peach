@@ -79,6 +79,8 @@ dacapo:
 rollback-test:
 	docker-compose exec app php artisan migrate:fresh
 	docker-compose exec app php artisan migrate:refresh
+route:
+	docker-compose exec app php artisan route:list
 tinker:
 	docker-compose exec app php artisan tinker
 test:
