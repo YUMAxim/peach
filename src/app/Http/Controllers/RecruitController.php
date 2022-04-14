@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recruit;
-use App\Http\recruits\RequestRequest;
+use App\Http\Requests\RecruitRequest;
 use Illuminate\Http\Request;
 
 class RecruitController extends Controller
