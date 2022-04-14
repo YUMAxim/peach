@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-    <form method="POST" action="{{ route('recruits.send') }}">
+    <form method="POST" action="{{ route('requests.send') }}">
         @csrf
         <label>募集タイトル</label>
         {{ $inputs['title'] }}
@@ -23,7 +23,7 @@
         {{ Form::label('booksize', 'サイズ') }}
         {{ Form::label('fileFormat','ファイル形式')}}
         {{ Form::label('my_role', 'あなたの担当') }}
-        {{ Form::label('recruits_role', '募集する担当') }}
+        {{ Form::label('collaborator_role', '募集する担当') }}
         {{ Form::label('desiredColorImpression', '希望の色のイメージ') }}
         {{ Form::label('desiredContentImpression', '希望イメージ') }}
         {{-- {{ Form::label('', ) }}
