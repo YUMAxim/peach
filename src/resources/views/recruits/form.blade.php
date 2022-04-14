@@ -33,12 +33,12 @@
 
 <div>
     <label>あなたの担当</label>
-{{Form::select('my_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C'])}}
+    {{Form::select('my_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C'])}}
 </div>
 
 <div>
     <label>募集する担当</label>
-{{Form::select('recruits_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C'])}}
+    {{Form::select('recruits_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C'])}}
 </div>
 
 </div>
@@ -51,12 +51,16 @@
     <input type="range" min="1" max="5">
 </div>
 
+<div>
+    {{ Form::label('file-attachment', '添付ファイル') }}
+    {{ Form::file('file-attachment') }}
+</div>
 
 <label>募集締切</label>
-{{Form::select('application-deadline', ['' => '', '' => '', '' => ''])}}
+{{  Form::select('application-deadline', ['' => '', '' => '', '' => ''])}}
 
 <label>納品希望日</label>
-{{Form::select('deadline', ['' => '', '' => '', '' => ''])}}
+{{  Form::select('deadline', ['' => '', '' => '', '' => ''])}}
 
 {{ Form::submit('確認画面へ') }}
 
