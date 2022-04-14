@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            // $table->bigInteger('user_id');
+            $table->bigInteger('user_id');
             $table->foreignId('user_id')->constrained('users');
+            $table->integer('category_id');
+            $table->foreign('category_id')->constrained('categories');
             $table->integer('budget');
             $table->integer('my_role');
             $table->integer('recruits_role');
