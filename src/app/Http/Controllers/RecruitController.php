@@ -83,6 +83,7 @@ class RecruitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //RecruitRequest form
     public function confirm(Request $request)
     {
         $inputs = $request->all();
@@ -97,7 +98,7 @@ class RecruitController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('recruits.index');
+        return redirect()->route('recruits.index');
     }
 
     /**

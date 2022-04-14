@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-    <form method="POST" action="{{ route('requests.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('recruits.store') }}" enctype="multipart/form-data">
     @csrf
         <label>募集タイトル</label>
         {{ $inputs['title'] }}
@@ -29,14 +29,13 @@
         {{-- {{ Form::label('', ) }}
         {{ Form::label('', ) }} --}}
 
-        <button type="submit" name="action" value="back">
-            入力内容修正
-        </button>
-        <button type="submit" name="action" value="submit">
-            送信する
-        </button>
+        <button type="submit" name="action" value="back">入力内容修正</button>
+        <button type="submit" name="action" value="submit">募集する</button>
     </form>
 
 </div>
+
+@php
 dd($inputs);
+@endphp
 @endsection
