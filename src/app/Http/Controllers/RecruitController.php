@@ -6,9 +6,12 @@ use App\Models\Recruit;
 use App\Http\Requests\RecruitRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\RecruitSelectController;
 
 class RecruitController extends Controller
 {
+    private $recruit_select;
+
     /**
      * Display a listing of the resource.
      *
@@ -69,10 +72,9 @@ class RecruitController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('name')->get();
-        $categories_name = $categories->pluck('name');
-        $categories_name->prepend('カテゴリーを選択してください');
-        // $categories = ['animal', 'science'];
+        $recruit_select = new RecruitSelectController;
+        $categories_name = $recruit_select->categories();
+
         return view('recruits.create', ['categories_name' => $categories_name]);
     }
 
