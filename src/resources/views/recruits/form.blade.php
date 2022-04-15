@@ -9,61 +9,68 @@
 {{ Form::select('category', $categories_name, old('category', $categories_name)) }}
 
 <label>予算</label>
-{{Form::select('budget', ['予算を選択してください', '10' => '10,000円', '20' => '20,000円', '30' => '30,000円']), 0}}
+{{ Form::select('budget', ['予算を選択してください','10' => '10,000円','20' => '20,000円','30' => '30,000円']),0 }}
 
 <label>ページ数</label>
-{{Form::select('page', ['10' => '10', '20' => '20', '30' => '30'])}}
+{{ Form::select('page', ['10' => '10', '20' => '20', '30' => '30']) }}
 
 <label>サイズ</label>
-{{Form::select('booksize', ['a4' => 'A4', 'b5' => 'B5', 'a5' => 'A5'])}}
+{{ Form::select('booksize', ['a4' => 'A4', 'b5' => 'B5', 'a5' => 'A5']) }}
 
-{{Form::label('fileFormat','ファイル形式')}}
+{{ Form::label('fileFormat', 'ファイル形式') }}
 <div>
-    {{Form::label('pdf','PDF')}}
-    {{Form::checkbox('pdf','aa', false, ['id'=>'pdf'])}}
+    {{ Form::label('pdf', 'PDF') }}
+    {{ Form::checkbox('pdf', 'aa', false, ['id' => 'pdf']) }}
 </div>
 <div>
-    {{Form::label('jpg','JPG')}}
-    {{Form::checkbox('jpg','aa', false, ['id'=>'jpg'])}}
+    {{ Form::label('jpg', 'JPG') }}
+    {{ Form::checkbox('jpg', 'aa', false, ['id' => 'jpg']) }}
 </div>
 <div>
-    {{Form::label('png','PNG')}}
-    {{Form::checkbox('png','aa', false, ['id'=>'png'])}}
+    {{ Form::label('png', 'PNG') }}
+    {{ Form::checkbox('png', 'aa', false, ['id' => 'png']) }}
 </div>
 
 <div>
     <label>あなたの担当</label>
-    {{Form::select('my_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C'])}}
+    {{ Form::select('my_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C']) }}
 </div>
 
 <div>
     <label>募集する担当</label>
-    {{Form::select('recruits_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C'])}}
+    {{ Form::select('recruits_role', ['role_A' => 'A', 'role_B' => 'B', 'role_C' => 'C']) }}
 </div>
 
 </div>
     {{ Form::label('desiredColorImpression', '希望の色のイメージ') }}
-    <input type="range" min="1" max="5">
+<input type="range" min="1" max="5">
 <div>
 
-<div>
-    {{ Form::label('desiredContentImpression', '希望イメージ') }}
-    <input type="range" min="1" max="5">
-</div>
+    <div>
+        {{ Form::label('desiredContentImpression', '希望イメージ') }}
+        <input type="range" min="1" max="5">
+    </div>
 
-<div>
-    {{ Form::label('file-attachment', '添付ファイル') }}
-    {{ Form::file('file-attachment') }}
-</div>
+    <div>
+        {{ Form::label('file-attachment', '添付ファイル') }}
+        {{ Form::file('file-attachment') }}
+    </div>
 
-<label>募集締切</label>
-{{  Form::select('application-deadline', ['' => '', '' => '', '' => ''])}}
+    @php
+        $today = \Carbon\Carbon::now();
+    @endphp
+    {{ Form::label('application-deadline', '募集締切') }}
+    {{ Form::selectRange('to_year', $today->year, $today->year + 1, $today->year) }}年
+    {{ Form::selectRange('to_month', 1, 12, $today->month) }}月
+    {{ Form::selectRange('to_day', 1, 31, $today->day) }}日
 
-<label>納品希望日</label>
-{{  Form::select('deadline', ['' => '', '' => '', '' => ''])}}
+    {{ Form::label('deadline', '納品希望日') }}
+    {{ Form::selectRange('to_year', $today->year, $today->year + 1, $today->year) }}年
+    {{ Form::selectRange('to_month', 1, 12, $today->month) }}月
+    {{ Form::selectRange('to_day', 1, 31, $today->day) }}日
 
-{{ Form::submit('確認画面へ') }}
+    {{ Form::submit('確認画面へ') }}
 
-@php
-    var_dump($categories_name);
-@endphp
+    @php
+        var_dump($categories_name);
+    @endphp
