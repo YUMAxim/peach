@@ -17,18 +17,16 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            $table->bigInteger('user_id');
             $table->foreignId('user_id')->constrained('users');
-            $table->integer('category_id');
-            $table->foreign('category_id')->constrained('categories');
-            $table->integer('budget');
-            $table->integer('my_role');
-            $table->integer('recruits_role');
-            $table->integer('page');
-            $table->integer('book_size');
-            $table->integer('file_format');
-            $table->integer('desired_color_impression');
-            $table->integer('desired_content_impression');
+            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('budget')->constrained('budgets');
+            $table->foreignId('my_role')->constrained('my_roles');
+            $table->foreignId('recruits_role')->constrained('recruits_roles');
+            $table->foreignId('page')->constrained('pages');
+            $table->foreignId('book_size')->constrained('book_sizes');
+            $table->foreignId('file_format')->constrained('file_formats');
+            $table->foreignId('desired_color_impression')->constrained('desired_color_impressions');
+            $table->foreignId('desired_content_impression')->constrained('desired_content_impressions');
             // Review
             // $table->file('file_attachment');
             $table->dateTime('application_deadline');
@@ -44,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recruits_requests');
+        Schema::dropIfExists('recruits');
     }
 };
