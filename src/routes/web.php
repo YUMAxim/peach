@@ -18,8 +18,8 @@ Route::post('comfirm', [RecruitController::class, 'confirm'])->name('recruits.co
 Route::post('send', [RecruitController::class, 'send'])->name('recruits.send');
 Route::resource('recruits', RecruitController::class)->except(['index']);
 
-Route::get('dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('dashboard', function () {
+//     return view('index');
+// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

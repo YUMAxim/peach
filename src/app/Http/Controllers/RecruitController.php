@@ -83,11 +83,12 @@ class RecruitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //RecruitRequest form
+    // RecruitRequest injection
     public function confirm(Request $request)
     {
         $inputs = $request->all();
-        return view('recruits.confirm', ['inputs' => $inputs]);
+        $data = ['inputs' => $inputs];
+        return view('recruits.confirm', $data);
     }
 
     /**
@@ -96,9 +97,23 @@ class RecruitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Recruit $recruit)
     {
-        return redirect()->route('recruits.index');
+        $recruit->title = $request->title;
+        $recruit->body = $request->body;
+        // $recruit->category = $request->category;
+        $recruit->budget = $request->budget;
+        $recruit->my_role = $request->my_role;
+        $recruit->recruits_role = $request->recruits_role;
+        $recruit->file_format = $request->file_format;
+        $recruit->page = $request->page;
+        $recruit->booksize = $request->booksize;
+        $recruit->desired_color_impression = $request->desiredColorImpression;
+        $recruit->desired_content_impression = $request->desiredContentImpression;
+        // $recruit-> = $request->;
+        $recruit->save();
+        $data = ['recruits' => $recruit];
+        return redirect()->route('recruits.index', $data);
     }
 
     /**
