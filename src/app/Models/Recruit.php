@@ -16,8 +16,11 @@ class Recruit extends Model
         'body',
         'page',
         'booksize',
+        'myrole',
+        'recruits_role',
         'desiredColorImpression',
         'desiredContentImpression',
+        'budget',
         'application-deadline',
         'deadline',
     ];
