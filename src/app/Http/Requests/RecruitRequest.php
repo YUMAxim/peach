@@ -25,18 +25,30 @@ class RecruitRequest extends FormRequest
     {
         return
             [
+                'user_id' => '',
                 'title' => 'required|max:50',
                 'body' => 'required|max:500',
                 'category' => 'required',
                 'budget' => 'required',
                 'page' => 'required|numeric',
-                'size' => 'required',
-                'file-format' => '',
-                'desiredColorImpression' => 'numeric',
-                'desiredContentImpression' => 'numeric',
-                'application-deadline' => 'date_format:Y-m-d',
-                'deadline' => 'required|date_format:Y-m-d',
+                'booksize' => 'required',
+                'my_role' => 'required',
+                'recruits_role' => 'required',
+                // 'file_format' => '',
+                // 'desired_color_impression' => 'numeric',
+                // 'desired_content_impression' => 'numeric',
+                // 'application-deadline' => 'date_format:Y-m-d',
+                // 'deadline' => 'required|date_format:Y-m-d',
             ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required'    => ':attributeを入力してください。',
+            'max'         => ':attributeは:max文字以内で入力してください。',
+            // 'date_format' => ':attributeを正しく入力してください。',
+        ];
     }
 
     /**
@@ -53,10 +65,12 @@ class RecruitRequest extends FormRequest
                 'category' => 'カテゴリー',
                 'budget' => '予算',
                 'page' => 'ページ数',
-                'size' => 'サイズ',
+                'booksize' => 'サイズ',
+                'my_role' => 'ご自身の担当',
+                'recruits_role' => '募集する担当',
                 'file-format' => 'ファイル形式',
-                'desiredColorImpression' => '希望の色のイメージ',
-                'desiredContentImpression' => '希望イメージ',
+                'desired_color_impression' => '希望の色のイメージ',
+                'desired_content_impression' => '希望イメージ',
                 'application-deadline' => '募集締切',
                 'deadline' => '納品希望日',
             ];

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recruit;
 use App\Http\Requests\RecruitRequest;
+use App\Models\Recruit;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RecruitSelectController;
@@ -19,50 +19,15 @@ class RecruitController extends Controller
      */
     public function index()
     {
-        /*         $recruits = [
-            (object) [
-                'id' => 1,
-                'title' => '募集タイトル1',
-                'body' => '募集内容の詳細1',
-                'budget' => '10万円',
-                'category' => 'A',
-                'recruits_role' => 'A',
-                'created_at' => now(),
-                'user' => (object) [
-                    'id' => 1,
-                    'name' => 'ユーザー名1',
-                ],
-            ],
-            (object) [
-                'id' => 1,
-                'title' => '募集タイトル1',
-                'body' => '募集内容の詳細1',
-                'budget' => '10万円',
-                'category' => 'A',
-                'recruits_role' => 'A',
-                'created_at' => now(),
-                'user' => (object) [
-                    'id' => 1,
-                    'name' => 'ユーザー名1',
-                ],
-            ],
-            (object) [
-                'id' => 1,
-                'title' => '募集タイトル1',
-                'body' => '募集内容の詳細1',
-                'budget' => '10万円',
-                'category' => 'A',
-                'recruits_role' => 'A',
-                'created_at' => now(),
-                'user' => (object) [
-                    'id' => 1,
-                    'name' => 'ユーザー名1',
-                ],
-            ],
-        ];
- */
         $recruits = Recruit::with('user')->get();
-        return view('recruits.index', ['recruits' => $recruits]);
+
+        $recruit_select = new RecruitSelectController;
+        $categories = $recruit_select->categories();
+        $select_options = $recruit_select->selectOptions();
+
+        $data = ['categories' => $categories, 'select_options' => $select_options];
+
+        return view('recruits.index', ['recruits' => $recruits], $data);
     }
 
     /**
@@ -73,9 +38,12 @@ class RecruitController extends Controller
     public function create()
     {
         $recruit_select = new RecruitSelectController;
-        $categories_name = $recruit_select->categories();
+        $categories = $recruit_select->categories();
+        $select_options = $recruit_select->selectOptions();
 
-        return view('recruits.create', ['categories_name' => $categories_name]);
+        $data = collect(['categories' => $categories, 'select_options' => $select_options]);
+
+        return view('recruits.create', $data);
     }
 
     /**
@@ -83,12 +51,17 @@ class RecruitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //RecruitRequest form
-    public function confirm(Request $request)
-    {
-        $inputs = $request->all();
-        return view('recruits.confirm', ['inputs' => $inputs]);
-    }
+    // RecruitRequest injection
+    // public function confirm(Request $request)
+    // {
+    //     $inputs = collect($request->all());
+    //     $recruit_select = new RecruitSelectController;
+    //     $categories = $recruit_select->categories();
+    //     $select_options = $recruit_select->selectOptions();
+    //     $data = collect(['inputs' => $inputs, 'categories' => $categories, 'select_options' => $select_options]);
+
+    //     return view('recruits.confirm', $data);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -96,9 +69,11 @@ class RecruitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Recruit $recruit)
     {
-        return redirect()->route('recruits.index');
+        $recruit = \Auth::user()->recruits()->create($request->all());
+        $data = ['recruit' => $recruit];
+        return redirect()->route('recruits.index', $data);
     }
 
     /**
@@ -107,9 +82,9 @@ class RecruitController extends Controller
      * @param  \App\Models\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Recruit $recruit)
     {
-        //
+        return view('recruits.show', ['recruit' => $recruit]);
     }
 
     /**
@@ -118,9 +93,15 @@ class RecruitController extends Controller
      * @param  \App\Models\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Recruit $recruit)
     {
-        //
+        $recruit_select = new RecruitSelectController;
+        $categories = $recruit_select->categories();
+        $select_options = $recruit_select->selectOptions();
+
+        $data = collect(['recruit' => $recruit, 'categories' => $categories, 'select_options' => $select_options]);
+
+        return view('recruits.edit', $data);
     }
 
     /**
@@ -132,7 +113,10 @@ class RecruitController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $recruit = \Auth::user()->recruits()->create($request->all());
+        $data = ['recruit' => $recruit];
+
+        return redirect()->route('recruits.index', $data);
     }
 
     /**
