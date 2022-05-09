@@ -17,5 +17,4 @@ mix.js("resources/js/app.js", "public/js")
         require("tailwindcss"),
         require("autoprefixer"),
     ])
-    .js("resources/js/sample.js", "public/js")
     .sass("resources/sass/app.scss", "public/css");

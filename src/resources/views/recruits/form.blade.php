@@ -1,3 +1,7 @@
+@php
+use App\Models\Role;
+@endphp
+
 @csrf
 {{-- Form::select()
 1st argument: name attribute of the selectbox menu
@@ -5,97 +9,118 @@
 3rd argument: default selected
 4th argument: additional attributes (associative array format) --}}
 
-<label>募集タイトル</label>
-<input type="text" name="title" required value="{{ $recruit->title ?? old('title') }}">
-
-<label>募集内容の詳細</label>
-<textarea name="body" required rows="16" placeholder="募集内容の詳細を入力してください">{{ $recruit->body ?? old('body') }}</textarea>
-
-<label>カテゴリー</label>
-{{ Form::select('category_id', $categories, old('category_id', $categories)) }}
-
-<label>ページ数</label>
-{{ Form::select('page', $select_options['pages']) }}
-
-<label>サイズ</label>
-{{ Form::select('booksize', $select_options['booksizes']) }}
-
-<div>
-    @for ($i = 0; $i < count($select_options['file_formats']); $i += 1)
-        {{ Form::checkbox('file_format', $i, false) }}
-        {{ Form::label('file_format', $select_options['file_formats'][$i]) }}
-    @endfor
+<div class="mb-5">
+    <label>募集タイトル</label>
+    <input type="text" name="title"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700"
+        placeholder="title" value="test" required>
 </div>
-{{-- <div>
-    {{ Form::label('pdf', 'PDF') }}
-    {{ Form::checkbox('file_format', 'aa', false, ['id' => 'pdf']) }}
+{{-- {{ $recruit->title ?? old('title') }} --}}
+
+<div class="mb-8 flex flex-col">
+    <label>募集内容の詳細</label>
+    <textarea name="body" rows="16" placeholder="募集内容の詳細を入力してください" required>this is test</textarea>
 </div>
-<div>
-    {{ Form::label('jpg', 'JPG') }}
-    {{ Form::checkbox('file_format', 'aa', false, ['id' => 'jpg']) }}
+{{-- {{ $recruit->body ?? old('body') }} --}}
+<div class="">
+    <label>カテゴリー</label>
+    {{ Form::select('category_id', $select_categories, old('category_id', $select_categories)) }}
 </div>
-<div>
-    {{ Form::label('png', 'PNG') }}
-    {{ Form::checkbox('file_format', 'aa', false, ['id' => 'png']) }}
+
+{{-- <div class="">
+    <h2>あなたの担当</h2>
+    <div class="">
+        @foreach ($select_roles as $role_category => $roles)
+            <p>{{ $role_category }}</p>
+            <div class="dropdown" data-control="checkbox-dropdown">
+                <label class="dropdown-label"></label>
+                <div class="dropdown-list">
+                    @foreach ($roles as $role)
+                        @php
+                            $tmp = Role::where('name', $role)
+                                ->pluck('id')
+                                ->implode('id');
+                            // dump($tmp);
+                        @endphp
+                        <label class="dropdown-option">
+                            {{ Form::checkbox('recruiter_role[]', $tmp, false) }}
+                            {{ $role }}
+                        </label>
+                    @endforeach
+                </div>
+            </div>
+            @dump($roles)
+        @endforeach
+</div>
+@dump($select_roles)
 </div> --}}
 
-<div>
-    <label>あなたの担当</label>
-    {{ Form::select('my_role', $select_options['my_roles']) }}
-</div>
-
-<div>
+<div class="">
     <label>募集する担当</label>
-    {{ Form::select('recruits_role', $select_options['recruits_roles']) }}
+    <div class="">
+        @foreach ($select_roles as $role_category => $roles)
+            <p>{{ $role_category }}</p>
+            @foreach ($roles as $role)
+                @php
+                    $tmp = Role::where('name', $role)
+                        ->pluck('id')
+                        ->implode('id');
+                    // dump($tmp);
+                @endphp
+                <div class="flex flex-col">
+                    <label class="">
+                        {{ $role }}
+                        <input type="number" name="rewards[{{ $tmp }}]">
+                    </label>
+                </div>
+            @endforeach
+            {{-- @dump($roles) --}}
+        @endforeach
+        <p>その他</p>
+        <input type="number" name="rewards[6]" value="その他">
+    </div>
 </div>
 
-<div>
-    @for ($i = 0; $i < count($select_options['desired_color_impressions']); $i += 1)
-        {{ Form::checkbox('desired_color_impression', $i, false) }}
-        {{ Form::label('desired_color_impression', $select_options['desired_color_impressions'][$i]) }}
-    @endfor
+<div class="">
+    <label for="budget">予算</label>
+    <select name="budget">
+        @for ($i = 500000; $i >= 150000; $i -= 10000)
+            <option value="{{ $i }}">{{ number_format($i) }}円</option>
+        @endfor
+        @for ($i = 150000; $i >= 50000; $i -= 5000)
+            <option value="{{ $i }}">{{ number_format($i) }}円</option>
+        @endfor
+        @for ($i = 510000; $i <= 2000000; $i += 10000)
+            <option value="{{ $i }}">{{ number_format($i) }}円</option>
+        @endfor
+    </select>
 </div>
 
-<div>
-    {{ Form::label('desired_content_impression', '希望イメージ') }}
-    <input type="range" name="desired_content_impression" min="1" max="5">
+<div class="">
+    <label for="file_attachment">添付ファイル</label>
+    <input id="file_attachment" name="file_attachment[]" type="file" multiple>
 </div>
 
-{{ Form::label('budget', '予算') }}
-<select name="budget">
-    @for ($i = 500000; $i >= 150000; $i -= 10000)
-        <option value="{{ $i }}">{{ number_format($i) }}円</option>
-    @endfor
-    @for ($i = 150000; $i >= 50000; $i -= 5000)
-        <option value="{{ $i }}">{{ number_format($i) }}円</option>
-    @endfor
-    @for ($i = 510000; $i <= 2000000; $i += 10000)
-        <option value="{{ $i }}">{{ number_format($i) }}円</option>
-    @endfor
-</select>
-
-<div>
-    {{ Form::label('file-attachment', '添付ファイル') }}
-    {{ Form::file('file-attachment') }}
-</div>
-
-{{-- @php
+@php
 $today = \Carbon\Carbon::now();
 @endphp
 
-{{ Form::label('application-deadline', '募集締切') }}
-{{ Form::selectRange('application_deadline_year', $today->year, $today->year + 1, $today->year) }}年
-{{ Form::selectRange('application_deadline_month', 1, 12, $today->month) }}月
-{{ Form::selectRange('application_deadline_day', 1, 31, $today->day) }}日
+<div class="">
+    <label for="application-deadline">募集締切</label>
+    {{ Form::selectRange('application_deadline_year', $today->year, $today->year + 1, $today->year) }}年
+    {{ Form::selectRange('application_deadline_month', 1, 12, $today->month) }}月
+    {{ Form::selectRange('application_deadline_day', 1, 31, $today->day) }}日
+</div>
 
-{{ Form::label('deadline', '納品希望日') }}
-{{ Form::selectRange('deadline_year', $today->year, $today->year + 1, $today->year) }}年
-{{ Form::selectRange('deadline_month', 1, 12, $today->month) }}月
-{{ Form::selectRange('deadline_day', 1, 31, $today->day) }}日 --}}
+<div class="">
+    <label for="deadline">完成希望日</label>
+    {{ Form::selectRange('deadline_year', $today->year, $today->year + 1, $today->year) }}年
+    {{ Form::selectRange('deadline_month', 1, 12, $today->month) }}月
+    {{ Form::selectRange('deadline_day', 1, 31, $today->day) }}日
+</div>
 
-{{ Form::submit('募集する') }}
-
-@php
-dd($select_options);
-// dd($categories);
-@endphp
+<input type="submit" value="募集する">
+<br>
+<br>
+<br>
+<br>

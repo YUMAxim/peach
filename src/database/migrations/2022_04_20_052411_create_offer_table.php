@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('recruits', function (Blueprint $table) {
+        Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('body');
+            $table->foreignId('recruit_id')->constrained('recruits');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('category_id')->constrained('categories');
-            $table->integer('budget');
-            // $table->foreignId('recruit_role_id')->constrained('recruit_role');
+            $table->text('body');
+            $table->string('recruits_role');
             // $table->file('file_attachment');
-            $table->date('application_deadline');
-            $table->date('deadline');
+            $table->date('completion_deadline');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recruits');
+        Schema::dropIfExists('offers');
     }
 };

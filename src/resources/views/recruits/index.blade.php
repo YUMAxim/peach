@@ -8,7 +8,7 @@
     @foreach ($recruits as $recruit)
         @include('recruits.card')
     @endforeach
-{{-- <!-- Section 2 -->
+<!-- Section 2 -->
 <section class="w-full px-6 pb-12 antialiased bg-white">
     <div class="mx-auto max-w-7xl">
 
@@ -278,5 +278,5 @@
                 more</a>
         </div>
     </div>
-</section> --}}
+</section>
 @endsection

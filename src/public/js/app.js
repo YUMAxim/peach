@@ -5099,6 +5099,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./checkbox */ "./resources/js/checkbox.js");
+
+__webpack_require__(/*! ./recruits-role */ "./resources/js/recruits-role.js");
+
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
@@ -5133,6 +5137,143 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/checkbox.js":
+/*!**********************************!*\
+  !*** ./resources/js/checkbox.js ***!
+  \**********************************/
+/***/ (() => {
+
+(function ($) {
+  var CheckboxDropdown = function CheckboxDropdown(el) {
+    var _this = this;
+
+    this.isOpen = false;
+    this.areAllChecked = false;
+    this.$el = $(el);
+    this.$label = this.$el.find(".dropdown-label");
+    this.$checkAll = this.$el.find('[data-toggle="check-all"]').first();
+    this.$inputs = this.$el.find('[type="checkbox"]');
+    this.onCheckBox();
+    this.$label.on("click", function (e) {
+      e.preventDefault();
+
+      _this.toggleOpen();
+    });
+    this.$checkAll.on("click", function (e) {
+      e.preventDefault();
+
+      _this.onCheckAll();
+    });
+    this.$inputs.on("change", function (e) {
+      _this.onCheckBox();
+    });
+  };
+
+  CheckboxDropdown.prototype.onCheckBox = function () {
+    this.updateStatus();
+  };
+
+  CheckboxDropdown.prototype.updateStatus = function () {
+    var checked = this.$el.find(":checked");
+    this.areAllChecked = false;
+    this.$checkAll.html("Check All");
+
+    if (checked.length <= 0) {
+      this.$label.html("Select Options");
+    } else if (checked.length === 1) {
+      this.$label.html(checked.parent("label").text());
+    } else if (checked.length === this.$inputs.length) {
+      this.$label.html("All Selected");
+      this.areAllChecked = true;
+      this.$checkAll.html("Uncheck All");
+    } else {
+      this.$label.html(checked.length + " Selected");
+    }
+  };
+
+  CheckboxDropdown.prototype.onCheckAll = function (checkAll) {
+    if (!this.areAllChecked || checkAll) {
+      this.areAllChecked = true;
+      this.$checkAll.html("Uncheck All");
+      this.$inputs.prop("checked", true);
+    } else {
+      this.areAllChecked = false;
+      this.$checkAll.html("Check All");
+      this.$inputs.prop("checked", false);
+    }
+
+    this.updateStatus();
+  };
+
+  CheckboxDropdown.prototype.toggleOpen = function (forceOpen) {
+    var _this = this;
+
+    if (!this.isOpen || forceOpen) {
+      this.isOpen = true;
+      this.$el.addClass("on");
+      $(document).on("click", function (e) {
+        if (!$(e.target).closest("[data-control]").length) {
+          _this.toggleOpen();
+        }
+      });
+    } else {
+      this.isOpen = false;
+      this.$el.removeClass("on");
+      $(document).off("click");
+    }
+  };
+
+  var checkboxesDropdowns = document.querySelectorAll('[data-control="checkbox-dropdown"]');
+
+  for (var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
+    new CheckboxDropdown(checkboxesDropdowns[i]);
+  }
+})(jQuery);
+
+/***/ }),
+
+/***/ "./resources/js/recruits-role.js":
+/*!***************************************!*\
+  !*** ./resources/js/recruits-role.js ***!
+  \***************************************/
+/***/ (() => {
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// let select = document.querySelector('[name="recruits_role"]');
+// select.onchange = event => {
+//   console.log(select.selectedIndex);
+// }
+window.addEventListener("DOMContentLoaded", function () {
+  var selects = document.querySelector("select[name=recruits_role]");
+  selects.addEventListener("change", function () {
+    var options = document.querySelectorAll("select[name=recruits_role] option");
+
+    var _iterator = _createForOfIteratorHelper(options),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var option = _step.value;
+
+        if (option.selected) {
+          console.log(option.value);
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  });
+});
 
 /***/ }),
 

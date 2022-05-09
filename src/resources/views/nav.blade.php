@@ -37,6 +37,12 @@
         @endauth
 
         @auth
+            <li class="nav-item">
+                {{-- <a href="{{ route() }}">マイページ</a> --}}
+            </li>
+        @endauth
+
+        @auth
             <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link">アイコン:)</a>

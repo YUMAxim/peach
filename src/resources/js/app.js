@@ -1,4 +1,6 @@
 require('./bootstrap');
+require('./checkbox');
+require('./recruits-role');
 
 import Alpine from 'alpinejs';
 

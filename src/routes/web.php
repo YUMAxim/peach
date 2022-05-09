@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecruitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OfferController;
 use App\Models\User;
 
 /*
@@ -21,6 +22,11 @@ Route::post('comfirm', [RecruitController::class, 'confirm'])->name('recruits.co
 Route::post('send', [RecruitController::class, 'send'])->name('recruits.send');
 Route::resource('recruits', RecruitController::class)->except(['index', 'show'])->middleware('auth');
 Route::resource('recruits', RecruitController::class)->only(['show']);
+
+Route::prefix('recruits/{recruit}')->group(function () {
+    Route::resource('offers', OfferController::class);
+});
+
 
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/{name}', [UserController::class, 'show'])->name('show');
