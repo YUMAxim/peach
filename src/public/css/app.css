@@ -1127,7 +1127,7 @@ select{
 }
 .border-gray-400{
   --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 .border-r-gray-100{
   --tw-border-opacity: 1;
@@ -1187,7 +1187,7 @@ select{
 }
 .bg-indigo-50{
   --tw-bg-opacity: 1;
-  background-color: rgb(238 242 255 / var(--tw-bg-opacity));
+  background-color: rgb(251 207 232 / var(--tw-bg-opacity));
 }
 .bg-gray-800{
   --tw-bg-opacity: 1;
@@ -2223,4 +2223,3 @@ body {
     line-height: 1;
   }
 }
-

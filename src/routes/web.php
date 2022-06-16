@@ -2,11 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecruitController;
+<<<<<<< HEAD
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\MessageController;
+=======
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OfferController;
+>>>>>>> origin/feature/recruit-form
 use App\Models\User;
 
 /*

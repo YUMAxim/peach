@@ -83,7 +83,11 @@
                 <div class="modal-body">
                     {{ $recruit->title }}を削除します。よろしいですか？
                 </div>
+<<<<<<< HEAD
                 <div class="">
+=======
+                <div class="modal-footer justify-content-between">
+>>>>>>> origin/feature/recruit-form
                     <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
                     <button type="submit" class="btn btn-danger">削除する</button>
                 </div>
@@ -94,5 +98,8 @@
 <!-- modal -->
 @endif
 </div>
+<<<<<<< HEAD
 
 @dump($recruit);
+=======
+>>>>>>> origin/feature/recruit-form

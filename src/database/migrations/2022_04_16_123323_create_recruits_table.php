@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('book_category_id')->constrained('book_categories');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('category_id')->constrained('categories');
             $table->integer('budget');
-            $table->string('file_name')->nullable();
-            $table->string('file_path')->nullable();
-            $table->dateTime('application_deadline');
+            // $table->foreignId('recruit_role_id')->constrained('recruit_role');
+            // $table->file('file_attachment');
+            $table->date('application_deadline');
             $table->date('deadline');
             $table->timestamps();
             $table->softDeletes();

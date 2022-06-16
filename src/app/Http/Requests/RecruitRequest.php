@@ -89,7 +89,7 @@ class RecruitRequest extends FormRequest
             'deadline' => $deadline,
         ]);
     }
-    
+
     /**
      * Set the attribute
      *
@@ -103,6 +103,7 @@ class RecruitRequest extends FormRequest
                 'body' => '募集内容の詳細',
                 'bookCategory' => 'カテゴリー',
                 'budget' => '予算',
+<<<<<<< HEAD
                 'recruiter_role' => 'ご自身の担当',
                 'recruits_role' => '募集する担当',
                 'applicationDeadlineYear' => '募集締切',
@@ -111,6 +112,17 @@ class RecruitRequest extends FormRequest
                 'deadlineYear' => '納品希望日',
                 'deadlineMonth' => '納品希望日',
                 'deadlineDay' => '納品希望日',
+=======
+                'page' => 'ページ数',
+                'booksize' => 'サイズ',
+                'recruiter_role' => 'ご自身の担当',
+                'recruits_role' => '募集する担当',
+                'file-format' => 'ファイル形式',
+                'desired_color_impression' => '希望の色のイメージ',
+                'desired_content_impression' => '希望イメージ',
+                'application-deadline' => '募集締切',
+                'deadline' => '納品希望日',
+>>>>>>> origin/feature/recruit-form
             ];
     }
 
