@@ -1,0 +1,21 @@
+## Shortcut
+
+# multiple scope select
+  Ctrl + D
+
+# refer origin definition
+  F12
+
+# display reference
+  Shift + F12
+
+# exit folder
+  Ctrl + K, F
+
+# go to symbol in file
+  Ctrl + Shift + O
+
+# toggle problem tab
+  Ctrl + Shift + M
+
+# 

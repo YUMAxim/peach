@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
+use App\Models\Recruit;
 
 class RecruitRequest extends FormRequest
 {
@@ -25,20 +27,69 @@ class RecruitRequest extends FormRequest
     {
         return
             [
-                'title' => 'required|max:50',
-                'body' => 'required|max:500',
-                'category' => 'required',
-                'budget' => 'required',
-                'page' => 'required|numeric',
-                'size' => 'required',
-                'file-format' => '',
-                'desiredColorImpression' => 'numeric',
-                'desiredContentImpression' => 'numeric',
-                'application-deadline' => 'date_format:Y-m-d',
-                'deadline' => 'required|date_format:Y-m-d',
+                // 'title' => [
+                //     'required',
+                //     'min:5',
+                //     'max:50',
+                // ],
+                // 'body' => [
+                //     'required',
+                //     'min:30',
+                //     'max:500',
+                // ],
+                // 'book_category_id' => [
+                //     'required',
+                // ],
+                // 'rewards.*' => [
+                //     // 'required',
+                //     'integer',
+                // ],
+                // 'attachedFile' => [
+                //     'file',
+                // ],
+                // 'budget' => [
+                //     'required',
+                //     'integer',
+                // ],
+                // 'application_deadline' => [
+                //     'required',
+                //     'date',
+                // ],
+                // 'deadline' => [
+                //     'required',
+                //     'integer',
+                // ],
             ];
     }
 
+    public function passedValidation()
+    {
+        $this->dateFormat();
+    }
+
+    public function dateFormat()
+    {
+        $date = new Carbon;
+        $year = $this->applicationDeadlineYear;
+        $month = $this->applicationDeadlineMonth;
+        $day = $this->applicationDeadlineDay;
+        $hour = 21;
+        $min = $date->minute;
+        $sec = $date->second;
+
+        $application_deadline = $date->setDateTime($year, $month, $day, $hour, $min, $sec);
+
+        $year = $this->deadlineYear;
+        $month = $this->deadlineMonth;
+        $day = $this->deadlineDay;
+        $deadline = $date->setDate($year, $month, $day);
+
+        $this->merge([
+            'application_deadline' => $application_deadline,
+            'deadline' => $deadline,
+        ]);
+    }
+    
     /**
      * Set the attribute
      *
@@ -50,15 +101,27 @@ class RecruitRequest extends FormRequest
             [
                 'title' => '募集タイトル',
                 'body' => '募集内容の詳細',
-                'category' => 'カテゴリー',
+                'bookCategory' => 'カテゴリー',
                 'budget' => '予算',
-                'page' => 'ページ数',
-                'size' => 'サイズ',
-                'file-format' => 'ファイル形式',
-                'desiredColorImpression' => '希望の色のイメージ',
-                'desiredContentImpression' => '希望イメージ',
-                'application-deadline' => '募集締切',
-                'deadline' => '納品希望日',
+                'recruiter_role' => 'ご自身の担当',
+                'recruits_role' => '募集する担当',
+                'applicationDeadlineYear' => '募集締切',
+                'applicationDeadlineMonth' => '募集締切',
+                'applicationDeadlineDay' => '募集締切',
+                'deadlineYear' => '納品希望日',
+                'deadlineMonth' => '納品希望日',
+                'deadlineDay' => '納品希望日',
             ];
     }
+
+    public function messages()
+    {
+        return [
+            'required'    => ':attributeを入力してください。',
+            'max'         => ':attributeは:max文字以内で入力してください。',
+            'integer' => ':attributeは整数で入力してください。',
+            'date_format' => ':attributeを入力してください。',
+        ];
+    }
+
 }
