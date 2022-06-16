@@ -1,32 +1,10 @@
-@extends('app')
-
-@section('title', '募集一覧')
-
-@section('content')
-    @include('nav')
+<x-app>
+    <x-slot name="title">募集一覧</x-slot>
+    <x-nav></x-nav>
+    {{-- @include('sample') --}}
+    @dump($recruits)
     @foreach ($recruits as $recruit)
-    <div class="container">
-        <div class="">
-            {{ $recruit->user->name }}
-        </div>
-        <div class="">
-            {{ $recruit->created_at->format('Y/m/d H:i') }}
-        </div>
-        <h3 class="">
-            {{ $recruit->title }}
-        </h3>
-        <div class="">
-            {!! nl2br(e( $recruit->body )) !!}
-        </div>
-        <div class="">
-            {{ $recruit->category }}
-        </div>
-        <div class="">
-            {{ $recruit->budget }}
-        </div>
-        <div class="">
-            {{ $recruit->recruits_role }}
-        </div>
-    </div>
+        @include('recruits.card')
     @endforeach
-@endsection
+    {{ $recruits->onEachSide(0)->links() }}
+</x-app>
