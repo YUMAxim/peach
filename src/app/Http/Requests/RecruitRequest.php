@@ -115,11 +115,19 @@ class RecruitRequest extends FormRequest
 =======
                 'page' => 'ページ数',
                 'booksize' => 'サイズ',
+<<<<<<< HEAD
                 'recruiter_role' => 'ご自身の担当',
                 'recruits_role' => '募集する担当',
                 'file-format' => 'ファイル形式',
                 'desired_color_impression' => '希望の色のイメージ',
                 'desired_content_impression' => '希望イメージ',
+=======
+                'my_role' => 'ご自身の担当',
+                'recruits_role' => '募集する担当',
+                'file-format' => 'ファイル形式',
+                'desired_color_Impression' => '希望の色のイメージ',
+                'desired_content_Impression' => '希望イメージ',
+>>>>>>> develop
                 'application-deadline' => '募集締切',
                 'deadline' => '納品希望日',
 >>>>>>> origin/feature/recruit-form
