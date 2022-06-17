@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function recruits(): HasMany
     {
-        return $this->hasMany('App\Models\Recruit');
+        return $this->hasMany(Recruit::class);
     }
 }

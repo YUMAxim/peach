@@ -2,76 +2,76 @@
 
 @section('content')
     <div>
-        <form action="{{ route('recruits.create') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            {{ Form::submit('入力内容修正', ['action' => "view('recruits.create')",'method' => 'POST','enctype' => 'multipart/form-data','name' => 'action','value' => 'back']) }}
-        </form>
         <form action="{{ route('recruits.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <label>募集タイトル</label>
             {{ $inputs['title'] }}
             {{ Form::hidden('title', $inputs['title']) }}
-            {{-- {{ Form::hidden('title', {{ $inputs['title'] }}) }} --}}
-            {{-- {{ $inputs[''] }}
-        {{ Form::hidden('', '{{ $inputs[''] }}') }} --}}
-
 
             <label>募集内容の詳細</label>
             {!! nl2br(e($inputs['body'])) !!}
             {{ Form::hidden('body', $inputs['body']) }}
-            {{-- {{ Form::hidden('body', '{{ $inputs['body'] }}') }} --}}
-
 
             {{ Form::label('category', 'カテゴリー') }}
-            {{ $inputs['category'] }}
-            {{-- {{ Form::hidden('category', $inputs['category']) }} --}}
-
+            {{ $categories[$inputs['category_id']] }}
+            {{ Form::hidden('category_id', $inputs['category_id']) }}
 
             {{ Form::label('page', 'ページ数') }}
-            {{ $inputs['page'] }}
-            {{ Form::hidden('page', $inputs['page']) }}
+            {{ $select_options['pages'][$inputs['page']] }}ページ
+            {{ Form::hidden('page', $select_options['pages'][$inputs['page']]) }}
 
             {{ Form::label('booksize', 'サイズ') }}
-            {{ $inputs['booksize'] }}
-            {{ Form::hidden('booksize', $inputs['booksize']) }}
+            {{ $select_options['booksizes'][$inputs['booksize']] }}ページ
+            {{ Form::hidden('booksize', $select_options['booksizes'][$inputs['booksize']]) }}
 
             {{ Form::label('file_format', 'ファイル形式') }}
-            {{-- {{ Form::hidden('file_format', $inputs['file_format']) }} --}}
+            {{ $select_options['file_formats'][$inputs['file_format']] }}
+            {{ Form::hidden('file_format', $select_options['file_formats'][$inputs['file_format']]) }}
 
-            {{ Form::label('my_role', 'あなたの担当') }}
-            {{ $inputs['my_role'] }}
-            {{ Form::hidden('my_role', $inputs['my_role']) }}
+            {{ Form::label('recruiter_role', 'あなたの担当') }}
+            {{ $select_options['recruiter_roles'][$inputs['recruiter_role']] }}
+            {{ Form::hidden('recruiter_role', $select_options['recruiter_roles'][$inputs['recruiter_role']]) }}
 
             {{ Form::label('recruits_role', '募集する担当') }}
-            {{ $inputs['recruits_role'] }}
-            {{ Form::hidden('recruits_role', $inputs['recruits_role']) }}
+            {{ $select_options['recruits_roles'][$inputs['recruits_role']] }}
+            {{ Form::hidden('recruits_role', $select_options['recruits_roles'][$inputs['recruits_role']]) }}
 
-            {{ Form::label('desired_color_Impression', '希望の色のイメージ') }}
-            {{ $inputs['desired_color_Impression'] }}
-            {{ Form::hidden('desired_color_Impression', $inputs['desired_color_Impression']) }}
+            {{ Form::label('desired_color_impression', '希望の色のイメージ') }}
+            {{ $select_options['desired_color_impressions'][$inputs['desired_color_impression']] }}
+            {{ Form::hidden('desired_color_impression',$select_options['desired_color_impressions'][$inputs['desired_color_impression']]) }}
 
-            {{ Form::label('desired_content_Impression', '希望イメージ') }}
-            {{ $inputs['desired_content_Impression'] }}
-            {{ Form::hidden('desired_content_Impression', $inputs['desired_content_Impression']) }}
+            {{ Form::label('desired_content_impression', '希望イメージ') }}
+            {{ $inputs['desired_content_impression'] }}
+            {{ Form::hidden('desired_content_impression', $inputs['desired_content_impression']) }}
 
             {{ Form::label('budget', '予算') }}
-            {{ $inputs['budget'] }}
+            {{ number_format($inputs['budget']) }}円
             {{ Form::hidden('budget', $inputs['budget']) }}
 
             {{ Form::label('application-deadline', '募集締切') }}
-            {{ $inputs['application_deadline_year'] .'年' .$inputs['application_deadline_month'] .'月' .$inputs['application_deadline_day'] .'日' }}
-            {{-- {{ Form::hidden('', {{ $inputs[''] }}) }} --}}
+
+            {{-- Convert date format --}}
+            @php
+                $date = $inputs['application_deadline_year'] . '-' . $inputs['application_deadline_month'] . '-' . $inputs['application_deadline_day'];
+            @endphp
+            {{ date('Y年m月d日', strtotime($date)) }}
+            {{ Form::hidden('application_deadline', $date) }}
 
             {{ Form::label('deadline', '納品希望日') }}
-            {{ $inputs['deadline_year'] . '年' . $inputs['deadline_month'] . '月' . $inputs['deadline_day'] . '日' }}
-            {{-- {{ Form::hidden('', {{ $inputs[''] }}) }} --}}
 
+            {{-- Convert date format --}}
+            @php
+                $date = $inputs['deadline_year'] . '-' . $inputs['deadline_month'] . '-' . $inputs['deadline_day'];
+            @endphp
+            {{ date('Y年m月d日', strtotime($date)) }}
+            {{ Form::hidden('deadline', $date) }}}
 
-            {{ Form::submit('submit') }}
+            {{ Form::submit('募集する') }}
         </form>
     </div>
 
     @php
+    // dd($date);
     dd($inputs);
     @endphp
 @endsection

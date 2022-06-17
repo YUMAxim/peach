@@ -30,6 +30,13 @@ return [
 
     'disks' => [
 
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => 'ftp',
+            'username' => 'phper',
+            'password' => 'secret',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

@@ -37,7 +37,7 @@ services:
       dockerfile: ./infra/docker/nginx/Dockerfile
     ports:
       - target: 80
-        published: ${WEB_PUBLISHED_PORT:-80}
+        published: ${WEB_PUBLISHED_PORT:-88}
         protocol: tcp
         mode: host
     volumes:
@@ -51,7 +51,7 @@ services:
       dockerfile: ./infra/docker/mysql/Dockerfile
     ports:
       - target: 3306
-        published: ${DB_PUBLISHED_PORT:-3306}
+        published: ${DB_PUBLISHED_PORT:-3366}
         protocol: tcp
         mode: host
     volumes:

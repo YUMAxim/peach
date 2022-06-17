@@ -20,18 +20,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
             $table->integer('budget');
-            $table->string('my_role');
-            $table->string('recruits_role');
-            $table->integer('page');
-            $table->string('booksize');
-            $table->string('file_format');
-            $table->string('desired_color_impression');
-            $table->integer('desired_content_impression');
-            // Review
+            // $table->foreignId('recruit_role_id')->constrained('recruit_role');
             // $table->file('file_attachment');
-            // $table->dateTime('application_deadline');
-            // $table->date('deadline');
+            $table->date('application_deadline');
+            $table->date('deadline');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
