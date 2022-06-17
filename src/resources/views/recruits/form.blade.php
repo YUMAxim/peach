@@ -46,47 +46,47 @@
 </div>
 
 </div>
-{{ Form::label('desiredColorImpression', '希望の色のイメージ') }}
+{{ Form::label('desired_color_Impression', '希望の色のイメージ') }}
 
-{{ Form::checkbox('desiredColorImpression', 'red', false) }}
-{{ Form::label('desiredColorImpression', '赤系') }}
+{{ Form::checkbox('desired_color_Impression', 'red', false) }}
+{{ Form::label('desired_color_Impression', '赤系') }}
 
-{{ Form::checkbox('desiredColorImpression', 'blue', false) }}
-{{ Form::label('desiredColorImpression', '青系') }}
+{{ Form::checkbox('desired_color_Impression', 'blue', false) }}
+{{ Form::label('desired_color_Impression', '青系') }}
 
-{{ Form::checkbox('desiredColorImpression', 'green', false) }}
-{{ Form::label('desiredColorImpression', '緑系') }}
+{{ Form::checkbox('desired_color_Impression', 'green', false) }}
+{{ Form::label('desired_color_Impression', '緑系') }}
 
-{{ Form::checkbox('desiredColorImpression', 'yellow', false) }}
-{{ Form::label('desiredColorImpression', '黃・オレンジ系') }}
+{{ Form::checkbox('desired_color_Impression', 'yellow', false) }}
+{{ Form::label('desired_color_Impression', '黃・オレンジ系') }}
 
-{{ Form::checkbox('desiredColorImpression', 'pink', false) }}
-{{ Form::label('desiredColorImpression', 'ピンク系') }}
+{{ Form::checkbox('desired_color_Impression', 'pink', false) }}
+{{ Form::label('desired_color_Impression', 'ピンク系') }}
 
-{{ Form::checkbox('desiredColorImpression', 'brown', false) }}
-{{ Form::label('desiredColorImpression', '茶系') }}
+{{ Form::checkbox('desired_color_Impression', 'brown', false) }}
+{{ Form::label('desired_color_Impression', '茶系') }}
 
-{{ Form::checkbox('desiredColorImpression', 'black', false) }}
-{{ Form::label('desiredColorImpression', '黒系') }}
+{{ Form::checkbox('desired_color_Impression', 'black', false) }}
+{{ Form::label('desired_color_Impression', '黒系') }}
 
-{{ Form::checkbox('desiredColorImpression', 'none', true) }}
-{{ Form::label('desiredColorImpression', '特になし') }}
+{{ Form::checkbox('desired_color_Impression', 'none', true) }}
+{{ Form::label('desired_color_Impression', '特になし') }}
 
-{{ Form::checkbox('desiredColorImpression', 'other', false) }}
-{{ Form::label('desiredColorImpression', 'その他') }}
+{{ Form::checkbox('desired_color_Impression', 'other', false) }}
+{{ Form::label('desired_color_Impression', 'その他') }}
 <div>
 
     <div>
-        {{ Form::label('desiredContentImpression', '希望イメージ') }}
-        <input type="range" name="desiredContentImpression" min="1" max="5">
+        {{ Form::label('desired_content_Impression', '希望イメージ') }}
+        <input type="range" name="desired_content_Impression" min="1" max="5">
     </div>
 
     {{ Form::label('budget', '予算') }}
     <select name="budget">
-        @for ($i = 500000; $i < 100000; $i -= 1000)
+        @for ($i = 500000; $i > 100000; $i -= 5000)
             <option value="{{ $i }}">{{ $i }}円</option>
         @endfor
-        @for ($i = 501000; $i < 2000000; $i += 1000)
+        @for ($i = 510000; $i < 2000000; $i += 10000)
             <option value="{{ $i }}">{{ $i }}円</option>
         @endfor
     </select>

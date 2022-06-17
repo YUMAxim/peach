@@ -17,8 +17,10 @@
 
         @auth
             <li class="nav-item">
-                    <a class="nav-link text-3xl font-bold bg-pink-600 hover:bg-pink-800"
-                        href="{{ route('recruits.create') }}">募集する</a>
+                <div class="">
+                    <a href="{{ route('recruits.create') }}"
+                        class="nav-link inline-flex items-center w-full px-6 py-3 text-xl font-medium leading-4 text-white bg-pink-500 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-pink-400 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-pink-500">募集する</a>
+                </div>
             </li>
         @endauth
 

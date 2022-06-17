@@ -25,6 +25,7 @@ class RecruitRequest extends FormRequest
     {
         return
             [
+                'user_id' => '',
                 'title' => 'required|max:50',
                 'body' => 'required|max:500',
                 'category' => 'required',
@@ -34,8 +35,8 @@ class RecruitRequest extends FormRequest
                 'my_role' => 'required',
                 'recruits_role' => 'required',
                 // 'file_format' => '',
-                // 'desiredColorImpression' => 'numeric',
-                // 'desiredContentImpression' => 'numeric',
+                // 'desired_color_Impression' => 'numeric',
+                // 'desired_content_Impression' => 'numeric',
                 // 'application-deadline' => 'date_format:Y-m-d',
                 // 'deadline' => 'required|date_format:Y-m-d',
             ];
@@ -68,8 +69,8 @@ class RecruitRequest extends FormRequest
                 'my_role' => 'ご自身の担当',
                 'recruits_role' => '募集する担当',
                 'file-format' => 'ファイル形式',
-                'desiredColorImpression' => '希望の色のイメージ',
-                'desiredContentImpression' => '希望イメージ',
+                'desired_color_Impression' => '希望の色のイメージ',
+                'desired_content_Impression' => '希望イメージ',
                 'application-deadline' => '募集締切',
                 'deadline' => '納品希望日',
             ];

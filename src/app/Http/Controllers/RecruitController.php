@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recruit;
 use App\Http\Requests\RecruitRequest;
+use App\Models\Recruit;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RecruitSelectController;
@@ -99,20 +99,10 @@ class RecruitController extends Controller
      */
     public function store(Request $request, Recruit $recruit)
     {
-        $recruit->title = $request->title;
-        $recruit->body = $request->body;
-        // $recruit->category = $request->category;
-        $recruit->budget = $request->budget;
-        $recruit->my_role = $request->my_role;
-        $recruit->recruits_role = $request->recruits_role;
-        $recruit->file_format = $request->file_format;
-        $recruit->page = $request->page;
-        $recruit->booksize = $request->booksize;
-        $recruit->desired_color_impression = $request->desiredColorImpression;
-        $recruit->desired_content_impression = $request->desiredContentImpression;
-        // $recruit-> = $request->;
-        $recruit->save();
-        $data = ['recruits' => $recruit];
+        // dd($recruit);dd($request);
+        $recruit->category()->fill($request->category_id);
+        $recruit = \Auth::user()->recruits()->create($request->all());
+        $data = ['recruit' => $recruit];
         return redirect()->route('recruits.index', $data);
     }
 
